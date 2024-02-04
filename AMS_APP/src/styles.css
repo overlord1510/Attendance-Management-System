@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --first:#99BC85;
+    --second:#BFD8AF;
+    --third:#D4E7C5;
+    --fourth:#E1F0DA;
+}
+body{
+    background-color: var(--third);
+}
+
+.button-register{
+    margin: 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+    background-color: var(--first);
+    border: 1px solid var(--first);
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px var(--third);
+    cursor: pointer;
+}
+.button-register:hover{
+    background-color: var(--second);
+    border: 1px solid var(--first);
+}
+
+.button-back{
+    margin: 8px;
+    padding: 8px;
+    font-size: 0.8rem;
+    background-color: var(--first);
+    border: 1px solid var(--first);
+    border-radius: 4px;
+    cursor: pointer;
+}
+.button-back:hover{
+    background-color: var(--second);
+    border: 1px solid var(--first);
+}

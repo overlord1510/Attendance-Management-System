@@ -1,0 +1,42 @@
+<div class="register-container">
+    <form [formGroup]="courseForm" (submit)="onSubmit()">
+        <div class="item">
+            <label for="">Course Name</label>
+            <input type="text" placeholder="Course Name" formControlName="courseName">
+        </div>
+        <div class="item">
+            <label for="">Course Code</label>
+            <input type="text" placeholder="Course Code" formControlName="courseCode">
+        </div>
+        <div class="item">
+            <label for="">Course Type</label>
+            <select formControlName="courseType">
+                <option [selected]="true" [disabled]="true" hidden>Select Course Type</option>
+                <option value="THEORY">Theory</option>
+                <option value="LABORATORY">Laboratory</option>
+            </select>
+        </div>
+        <div class="item">
+            <label for="">Semester</label>
+            <select formControlName="semester">
+                <option [selected]="true" [disabled]="true" hidden>Select Semester</option>
+                <option value="SEM_1">Sem-1</option>
+                <option value="SEM_2">Sem-2</option>
+                <option value="SEM_3">Sem-3</option>
+                <option value="SEM_4">Sem-4</option>
+                <option value="SEM_5">Sem-5</option>
+                <option value="SEM_6">Sem-6</option>
+                <option value="SEM_7">Sem-7</option>
+                <option value="SEM_8">Sem-8</option>
+                <option value="SEM_9">Sem-9</option>
+                <option value="SEM_10">Sem-10</option>
+            </select>
+
+        </div>
+        <div class="item">
+            <button class="button-register" type="submit" [disabled]="courseForm.invalid">Save Course</button>
+        </div>
+    </form>
+
+    <button class="button-back" (click)="back()">Back</button>
+</div>

@@ -1,0 +1,48 @@
+<div class="register-container">
+    <form [formGroup]="instructorForm" (submit)="onSubmit()">
+        <div class="item">
+            <label for="">Instructor Name</label>
+            <input type="text" placeholder="Instructor Name" formControlName="name">
+        </div>
+
+        <div class="item">
+            <label for="">Instructor Email</label>
+            <input type="text" placeholder="Email" formControlName="email">
+        </div>
+
+        <div class="item">
+            <label for="">Instructor Password</label>
+            <input type="text" placeholder="Password" formControlName="password">
+        </div>
+
+        <div class="item">
+            <label for="">Gender</label>
+            <select formControlName="gender">
+                <option [selected]="true" [disabled]="true" hidden>Select Gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+            </select>
+        </div>
+
+        <div class="item">
+            <label for="">Date Of Birth</label>
+            <input type="date" formControlName="dob">
+        </div>
+
+        <div class="item">
+            <label for="">Department</label>
+            <select formControlName="department">
+                <option [selected]="true" [disabled]="true" [hidden]="true">Select Department</option>
+                <option *ngFor="let dept of department_resp" [value]="dept.id">{{dept.name}}</option>
+            </select>
+        </div>
+
+        <div class="item">
+            <button class="button-register" type="submit" [disabled]="instructorForm.invalid">Save Instructor</button>
+        </div>
+
+    </form>
+
+    <button class="button-back" (click)="back()">Back</button>
+</div>
