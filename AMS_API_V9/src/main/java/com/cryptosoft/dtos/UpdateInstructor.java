@@ -3,6 +3,7 @@ package com.cryptosoft.dtos;
 import java.util.Date;
 import java.util.List;
 
+import com.cryptosoft.entity.Batch;
 import com.cryptosoft.entity.Course;
 import com.cryptosoft.entity.Department;
 import com.cryptosoft.entity.Gender;
@@ -28,5 +29,7 @@ public class UpdateInstructor {
 	private UserAuth userAuth;
 	
 	private List<Course> courses;
+	
+	private List<Batch> batches;
 	
 }

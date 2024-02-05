@@ -70,6 +70,7 @@ public class InstructorService {
 				.userAuth(instructor.getUserAuth())
 				.dob(instructor.getDob())
 				.courses(instructor.getCourses())
+				.batches(instructor.getBatches())
 				.build();
 		// @formatter:on
 
