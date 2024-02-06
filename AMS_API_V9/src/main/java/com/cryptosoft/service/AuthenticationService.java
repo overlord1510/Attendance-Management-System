@@ -43,6 +43,7 @@ public class AuthenticationService {
 			authResponse = AuthenticationResponse
 						.builder()
 						.token(token)
+						.email(authenticationRequest.getEmail())
 						.role(userAuth.getRole().toString())
 						.build();
 			

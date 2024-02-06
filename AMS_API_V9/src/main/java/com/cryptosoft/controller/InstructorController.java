@@ -45,6 +45,7 @@ public class InstructorController {
 
 	@PatchMapping("/updateInstructor")
 	public ResponseEntity<?> updateInstructor(@RequestBody UpdateInstructor updateInstructor) {
+		
 		try {
 			instructorService.updateInstructor(updateInstructor);
 		} catch (Exception e) {
@@ -68,6 +69,9 @@ public class InstructorController {
 			updateInstructor = instructorService.getInstructorById(id);
 		} catch (EntityNotFoundException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<UpdateInstructor>(updateInstructor, HttpStatus.OK);
 	}

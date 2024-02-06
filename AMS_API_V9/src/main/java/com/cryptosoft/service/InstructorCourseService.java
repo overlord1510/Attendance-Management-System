@@ -37,8 +37,39 @@ public class InstructorCourseService {
 
 			// Update the relationship for each course
 			courses.forEach(course -> {
-				course.getInstructors().add(instructor);
-				instructor.getCourses().add(course);
+				if (!course.getInstructors().contains(instructor)) {
+					course.getInstructors().add(instructor);					
+				}
+				if(!instructor.getCourses().contains(course)) {
+					instructor.getCourses().add(course);
+				}
+			});
+
+			// Persist the changes
+			courseRepository.saveAll(courses);
+			instructorRepository.save(instructor);
+		} else {
+			throw new EntityNotFoundException("Instructor not found");
+		}
+	}
+	
+	@Transactional
+	public void removeInstructorToCourses(AssignInstructorToCourseRequest removeInstructorToCourseRequest) {
+		// Retrieve the Instructor
+		Optional<Instructor> instructorOptional = instructorRepository
+				.findById(removeInstructorToCourseRequest.getId());
+
+		if (instructorOptional.isPresent()) {
+			Instructor instructor = instructorOptional.get();
+
+			// Retrieve the Courses
+			List<Course> courses = courseRepository
+					.findAllById(removeInstructorToCourseRequest.getCourses().stream().map(Course::getId).toList());
+
+			// Update the relationship for each course
+			courses.forEach(course -> {
+				course.getInstructors().remove(instructor);
+				instructor.getCourses().remove(course);
 			});
 
 			// Persist the changes

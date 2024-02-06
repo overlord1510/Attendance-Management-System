@@ -37,8 +37,12 @@ public class InstructorBatchService {
 
 			// Update the relationship for each course
 			batches.forEach(batch -> {
-				batch.getInstructors().add(instructor);
-				instructor.getBatches().add(batch);
+				if (!batch.getInstructors().contains(instructor)) {
+					batch.getInstructors().add(instructor);					
+				}
+				if (!instructor.getBatches().contains(batch)) {
+					instructor.getBatches().add(batch);
+				}
 			});
 
 			// Persist the changes

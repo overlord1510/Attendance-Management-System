@@ -61,6 +61,7 @@ public class InstructorService {
 
 	public UpdateInstructor getInstructorById(Integer id) throws EntityNotFoundException {
 		Instructor instructor = instructorRepository.getReferenceById(id);
+		System.out.println(instructor.getBatches());
 		// @formatter:off
 		return UpdateInstructor.builder()
 				.id(instructor.getId())
@@ -88,7 +89,7 @@ public class InstructorService {
 	    instructor.getUserAuth().setEmail(updateInstructor.getUserAuth().getEmail());
 	    instructor.getUserAuth().setRole(updateInstructor.getUserAuth().getRole());
 	    instructor.setCourses(updateInstructor.getCourses());
-		
+		instructor.setBatches(updateInstructor.getBatches());
 	    instructorRepository.save(instructor);
 		// @formatter:on
 
@@ -99,7 +100,9 @@ public class InstructorService {
 				.orElseThrow(() -> new EntityNotFoundException("Instructor not Found"));
 
 		instructor.getCourses().forEach(course -> course.getInstructors().remove(instructor));
+		instructor.getBatches().forEach(batch -> batch.getInstructors().remove(instructor));
 		instructorRepository.delete(instructor);
 	}
 
+	
 }

@@ -1,6 +1,8 @@
 package com.cryptosoft.entity;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,10 +17,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,10 +48,12 @@ public class Batch {
     @Column(nullable = false)
     private BatchType batchType;
     
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "batch_courses", joinColumns = @JoinColumn(name = "batch_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "batch_instructor", joinColumns = @JoinColumn(name = "batch_id"), inverseJoinColumns = @JoinColumn(name = "instructor_id"))
     private List<Instructor> instructors;

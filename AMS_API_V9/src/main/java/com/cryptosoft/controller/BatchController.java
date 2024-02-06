@@ -50,14 +50,14 @@ public class BatchController {
     }
 
     @GetMapping("/get-batch-list")
-    public ResponseEntity<List<Batch>> getAllBatches() {
-        List<Batch> batches = batchService.getAllBatches();
+    public ResponseEntity<List<UpdateBatch>> getAllBatches() {
+        List<UpdateBatch> batches = batchService.getAllBatches();
         return ResponseEntity.ok(batches);
     }
 
     @GetMapping("/getBatch/{batchId}")
-    public ResponseEntity<Batch> getBatchById(@PathVariable int batchId) {
-        Batch batch = batchService.getBatchById(batchId);
+    public ResponseEntity<UpdateBatch> getBatchById(@PathVariable int batchId) {
+        UpdateBatch batch = batchService.getBatchById(batchId);
         return ResponseEntity.ok(batch);
     }
 	

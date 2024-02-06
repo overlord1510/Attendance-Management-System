@@ -1,5 +1,6 @@
 package com.cryptosoft.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -34,7 +35,8 @@ public class BatchService {
 
 	@Transactional
 	public Batch updateBatch(UpdateBatch updatedBatch) {
-		Batch existingBatch = getBatchById(updatedBatch.getId());
+		Batch existingBatch = batchRepository.findById(updatedBatch.getId())
+				.orElseThrow(() -> new EntityNotFoundException("Batch not found with ID: " + updatedBatch.getId()));
 		existingBatch.setBatchName(updatedBatch.getBatchName());
 		existingBatch.setDepartment(updatedBatch.getDepartment());
 		existingBatch.setSemester(updatedBatch.getSemester());
@@ -45,19 +47,43 @@ public class BatchService {
 
 	@Transactional
 	public void deleteBatch(int batchId) {
-		Batch batch = getBatchById(batchId);
+		Batch batch = batchRepository.findById(batchId)
+				.orElseThrow(() -> new EntityNotFoundException("Batch not found with ID: " + batchId));
 		batchRepository.delete(batch);
 	}
 
 	@Transactional(readOnly = true)
-	public List<Batch> getAllBatches() {
-		return batchRepository.findAll();
+	public List<UpdateBatch> getAllBatches() {
+		List<UpdateBatch> batchList = new ArrayList<UpdateBatch>();
+		
+		batchRepository.findAll().forEach((batch)->{
+			batchList.add(UpdateBatch.builder()
+					.id(batch.getId())
+					.batchName(batch.getBatchName())
+					.batchType(batch.getBatchType())
+					.department(batch.getDepartment())
+					.semester(batch.getSemester())
+					.courses(batch.getCourses())
+					.build());
+		});
+		return batchList;
 	}
 
 	@Transactional(readOnly = true)
-	public Batch getBatchById(int batchId) {
-		return batchRepository.findById(batchId)
-				.orElseThrow(() -> new EntityNotFoundException("Batch not found with ID: " + batchId));
+	public UpdateBatch getBatchById(int batchId) {
+		
+		Batch batch = batchRepository.findById(batchId)
+		.orElseThrow(() -> new EntityNotFoundException("Batch not found with ID: " + batchId));
+		
+		
+		return UpdateBatch.builder()
+				.id(batch.getId())
+				.batchName(batch.getBatchName())
+				.batchType(batch.getBatchType())
+				.department(batch.getDepartment())
+				.semester(batch.getSemester())
+				.courses(batch.getCourses())
+				.build();
 	}
 
 	public Long getBatchCount() {

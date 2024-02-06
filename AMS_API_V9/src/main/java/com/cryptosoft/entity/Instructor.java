@@ -18,10 +18,12 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,9 +53,9 @@ public class Instructor {
 	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
 	private UserAuth userAuth;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "instructors",cascade = CascadeType.PERSIST)
 	private List<Course> courses;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
+	@ManyToMany(mappedBy = "instructors",cascade = CascadeType.PERSIST)
 	private List<Batch> batches;
 }
