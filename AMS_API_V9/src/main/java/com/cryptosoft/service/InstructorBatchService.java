@@ -1,5 +1,6 @@
 package com.cryptosoft.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +32,21 @@ public class InstructorBatchService {
 		if (instructorOptional.isPresent()) {
 			Instructor instructor = instructorOptional.get();
 
+			if(instructor.getBatches()==null) {
+				instructor.setBatches(new ArrayList<Batch>());
+			}
+			
 			// Retrieve the Courses
 			List<Batch> batches = batchRepository
 					.findAllById(assignInstructorToBatchRequest.getBatches().stream().map(Batch::getId).toList());
 
 			// Update the relationship for each course
 			batches.forEach(batch -> {
+				
+				if(batch.getInstructors()==null) {
+					batch.setInstructors(new ArrayList<Instructor>());
+				}
+				
 				if (!batch.getInstructors().contains(instructor)) {
 					batch.getInstructors().add(instructor);					
 				}

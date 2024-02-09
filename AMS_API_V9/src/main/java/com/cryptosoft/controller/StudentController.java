@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cryptosoft.dtos.StudentRegisterRequest;
@@ -35,6 +36,8 @@ public class StudentController {
 	@PostMapping("/saveStudent")
 	public ResponseEntity<?> saveInstructor(@RequestBody StudentRegisterRequest studentRegisterRequest) {
 		try {
+//			Student savedStudent = studentService.saveStudent(studentRegisterRequest);
+//			studentService.assignBatchToStudent(savedStudent, studentRegisterRequest.getBatches());
 			studentService.saveStudent(studentRegisterRequest);
 		} catch (SQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
@@ -82,6 +85,9 @@ public class StudentController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+
+	
+	
 	@GetMapping("/studentCount")
 	public ResponseEntity<Long> studentCount() {
 		return new ResponseEntity<Long>(studentService.studentCount(), HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.cryptosoft.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +32,21 @@ public class InstructorCourseService {
 		if (instructorOptional.isPresent()) {
 			Instructor instructor = instructorOptional.get();
 
+			if(instructor.getCourses()==null) {
+				instructor.setCourses(new ArrayList<Course>());
+			}
+			
 			// Retrieve the Courses
 			List<Course> courses = courseRepository
 					.findAllById(assignInstructorToCourseRequest.getCourses().stream().map(Course::getId).toList());
 
 			// Update the relationship for each course
 			courses.forEach(course -> {
+				
+				if(course.getInstructors()==null) {
+					course.setInstructors(new ArrayList<Instructor>());
+				}
+				
 				if (!course.getInstructors().contains(instructor)) {
 					course.getInstructors().add(instructor);					
 				}

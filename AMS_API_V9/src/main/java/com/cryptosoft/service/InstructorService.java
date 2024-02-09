@@ -37,11 +37,11 @@ public class InstructorService {
 		.role(Role.INSTRUCTOR)
 		.build();
 		
-		authRepository.save(user);
+		UserAuth savedUser = authRepository.save(user);
 		
 		Instructor instructor = Instructor.builder()
 		.name(instructorRegisterRequest.getName())
-		.userAuth(user)
+		.userAuth(savedUser)
 		.dob(instructorRegisterRequest.getDob())
 		.gender(instructorRegisterRequest.getGender())
 		.department(instructorRegisterRequest.getDepartment())

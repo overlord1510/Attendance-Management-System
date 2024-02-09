@@ -57,5 +57,10 @@ public class Batch {
     @ManyToMany
     @JoinTable(name = "batch_instructor", joinColumns = @JoinColumn(name = "batch_id"), inverseJoinColumns = @JoinColumn(name = "instructor_id"))
     private List<Instructor> instructors;
+    
+    @JsonIgnore
+    @ManyToMany
+	@JoinTable(name = "batch_student", joinColumns = @JoinColumn(name = "batch_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+	private List<Student> students;
    
 }
