@@ -44,8 +44,7 @@ public class AttendanceController {
 	}
 
 	@GetMapping("/teacher/getStudentsUsingBatch")
-	public ResponseEntity<?> getStudentsUsingBatch(@RequestParam("batchId") Integer batchId,
-			@RequestParam("courseId") Integer courseId) {
+	public ResponseEntity<?> getStudentsUsingBatch(@RequestParam("batchId") Integer batchId) {
 		return new ResponseEntity<List<Student>>(studentService.findStudentbyBatchId(batchId), HttpStatus.OK);
 	}
 

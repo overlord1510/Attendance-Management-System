@@ -22,4 +22,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	@Query("SELECT s FROM Student s JOIN FETCH s.batches WHERE s.id = ?1")
     Optional<Student> findByIdWithBatches(Integer id);
 	
+	@Query("SELECT s.department, s.semester, COUNT(s) FROM Student s GROUP BY s.department, s.semester")
+	List<Object[]> findStudentCountByDepartmentAndSemester();
+	
+	List<Student> findStudentByDepartment_IdAndSemester(Integer dept_id,String semester);
+
+	
 }

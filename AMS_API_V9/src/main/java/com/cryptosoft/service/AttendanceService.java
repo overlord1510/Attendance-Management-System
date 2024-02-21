@@ -26,7 +26,9 @@ import com.cryptosoft.repository.UserAuthRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -101,11 +103,30 @@ public class AttendanceService {
 		// Find the student by email
 		Student student = studentRepository.findByUserAuthEmail(email)
 				.orElseThrow(() -> new EntityNotFoundException("Student not found with email: " + email));
+		
+		
+		HashMap<Integer, CourseAttendance> attendanceMap = new HashMap<Integer, CourseAttendance>();
+		student.getBatches().forEach(batch->{
+			batch.getCourses().forEach(course->{
+				log.info(course.getCourseName());
+				// @formatter:off
+				attendanceMap.put(course.getId(), CourseAttendance.builder()
+						.id(course.getId())
+						.courseName(course.getCourseName())
+						.courseCode(course.getCourseCode())
+						.courseType(course.getCourseType())
+						.daysPresent(0)
+						.totalDays(0)
+						.build()); 
+				// @formatter:on
+
+			});
+		});
 
 		// Retrieve all attendance records for the student
 		List<Attendance> attendanceRecords = attendanceRepository.findByStudentId(student.getId());
+		log.info("Attendance Record"+attendanceRecords.size());
 
-		HashMap<Integer, CourseAttendance> attendanceMap = new HashMap<Integer, CourseAttendance>();
 
 		// Group attendance records by courses
 		attendanceRecords.forEach((attendance) -> {
@@ -116,18 +137,19 @@ public class AttendanceService {
 				course.setTotalDays(course.getTotalDays()+1);
 				course.setDaysPresent((attendance.isPresent())?course.getDaysPresent()+1:course.getDaysPresent());
 				attendanceMap.put(attendance.getCourse().getId(), course);
-			}else {
-				// @formatter:off
-				attendanceMap.put(attendance.getCourse().getId(), CourseAttendance.builder()
-						.id(attendance.getCourse().getId())
-						.courseName(attendance.getCourse().getCourseName())
-						.courseCode(attendance.getCourse().getCourseCode())
-						.courseType(attendance.getCourse().getCourseType())
-						.daysPresent((attendance.isPresent())?1:0)
-						.totalDays(1)
-						.build());
-				// @formatter:on
 			}
+//			else {
+//				// @formatter:off
+//				attendanceMap.put(attendance.getCourse().getId(), CourseAttendance.builder()
+//						.id(attendance.getCourse().getId())
+//						.courseName(attendance.getCourse().getCourseName())
+//						.courseCode(attendance.getCourse().getCourseCode())
+//						.courseType(attendance.getCourse().getCourseType())
+//						.daysPresent((attendance.isPresent())?1:0)
+//						.totalDays(1)
+//						.build());
+//				// @formatter:on
+//			}
 		});
 
 		ArrayList<CourseAttendance> completeAttendance = new ArrayList<CourseAttendance>();

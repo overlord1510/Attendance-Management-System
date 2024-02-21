@@ -63,7 +63,7 @@ public class Student {
 	private String universityRoll;
 
 
-	@ManyToMany(mappedBy = "students",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	@ManyToMany(mappedBy = "students",cascade = {CascadeType.PERSIST})
 	private List<Batch> batches;
 	
 

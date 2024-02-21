@@ -30,14 +30,5 @@ public class InstructorCourseController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    @PostMapping("/remove")
-    public ResponseEntity<?> removeInstructorToCourse(@RequestBody AssignInstructorToCourseRequest removeInstructorToCourseRequest) {
-        try {
-            instructorCourseService.removeInstructorToCourses(removeInstructorToCourseRequest);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+ 
 }

@@ -31,9 +31,17 @@ public class InstructorBatchService {
 
 		if (instructorOptional.isPresent()) {
 			Instructor instructor = instructorOptional.get();
+			
+			List<Batch> findByInstructors = batchRepository.findByInstructors(instructor);
+			
+			findByInstructors.forEach(batch->{
+				batch.getInstructors().remove(instructor);
+			});
 
 			if(instructor.getBatches()==null) {
 				instructor.setBatches(new ArrayList<Batch>());
+			}else {
+				instructor.getBatches().clear();
 			}
 			
 			// Retrieve the Courses
@@ -50,9 +58,7 @@ public class InstructorBatchService {
 				if (!batch.getInstructors().contains(instructor)) {
 					batch.getInstructors().add(instructor);					
 				}
-				if (!instructor.getBatches().contains(batch)) {
 					instructor.getBatches().add(batch);
-				}
 			});
 
 			// Persist the changes

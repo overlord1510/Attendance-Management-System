@@ -129,7 +129,7 @@ public class StudentService {
 
 	public void updatestudent(UpdateStudent updateStudent) {
 		// @formatter:off
-		studentRepository.save(Student.builder()
+		Student savedStudent = studentRepository.save(Student.builder()
 				.id(updateStudent.getId())
 				.name(updateStudent.getName())
 				.userAuth(updateStudent.getUserAuth())
@@ -141,6 +141,7 @@ public class StudentService {
 				.universityRoll(updateStudent.getUniversityRoll())
 				.build());
 		// @formatter:on
+		assignBatchToStudent(savedStudent, updateStudent.getBatches());
 
 	}
 
@@ -160,6 +161,10 @@ public class StudentService {
 
 	public List<Student> findStudentbyBatchId(Integer batchId) {
 		return studentRepository.findAllByBatchesId(batchId);
+	}
+
+	public List<Student> getStudentsUsingDepartmentAndSemester(Integer dept_id, String semester) {
+		return studentRepository.findStudentByDepartment_IdAndSemester(dept_id, semester);
 	}
 
 }

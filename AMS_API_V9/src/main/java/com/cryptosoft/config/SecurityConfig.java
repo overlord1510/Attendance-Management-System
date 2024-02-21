@@ -33,6 +33,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize ->
                         authorize
                         		.requestMatchers("/api/v1/auth/**").permitAll()
+                        		.requestMatchers("/api/v1/admin/saveStudent","/api/v1/admin/getAllDepartment",
+                        				"/api/v1/admin/get-batch-list").permitAll()
                         		.requestMatchers("/api/v1/student/**").hasAuthority(Role.STUDENT.toString())
                         		.requestMatchers("/api/v1/teacher/**").hasAuthority(Role.INSTRUCTOR.toString())
                         		.requestMatchers("/api/v1/admin/**").hasAuthority(Role.ADMIN.toString())

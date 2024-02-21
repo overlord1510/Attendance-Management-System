@@ -26,15 +26,15 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/admin")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
 public class StudentController {
 
 	private final StudentService studentService;
 
-	@PostMapping("/saveStudent")
-	public ResponseEntity<?> saveInstructor(@RequestBody StudentRegisterRequest studentRegisterRequest) {
+	@PostMapping("/admin/saveStudent")
+	public ResponseEntity<?> saveStudent(@RequestBody StudentRegisterRequest studentRegisterRequest) {
 		try {
 //			Student savedStudent = studentService.saveStudent(studentRegisterRequest);
 //			studentService.assignBatchToStudent(savedStudent, studentRegisterRequest.getBatches());
@@ -46,8 +46,8 @@ public class StudentController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@PatchMapping("/updateStudent")
-	public ResponseEntity<?> updateInstructor(@RequestBody UpdateStudent updateStudent) {
+	@PatchMapping("/admin/updateStudent")
+	public ResponseEntity<?> updateStudent(@RequestBody UpdateStudent updateStudent) {
 		try {
 			studentService.updatestudent(updateStudent);
 		} catch (Exception e) {
@@ -59,12 +59,12 @@ public class StudentController {
 		
 	}
 
-	@GetMapping("/get-student-list")
-	public ResponseEntity<List<Student>> getInstructorList() {
+	@GetMapping("/admin/get-student-list")
+	public ResponseEntity<List<Student>> getStudentList() {
 		return new ResponseEntity<List<Student>>(studentService.getAllStudent(), HttpStatus.OK);
 	}
 
-	@GetMapping("/getStudent/{id}")
+	@GetMapping("/admin/getStudent/{id}")
 	public ResponseEntity<?> getStudent(@PathVariable("id") Integer id) {
 		UpdateStudent updateStudent= null;
 		try {
@@ -75,7 +75,12 @@ public class StudentController {
 		return new ResponseEntity<UpdateStudent>(updateStudent, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/deleteStudent/{id}")
+	@GetMapping("/admin/getStudentsOfDepartmentOfSemester")
+	public ResponseEntity<?> getStudentsUsingDepartmentAndSemeter(@RequestParam Integer dept_id,@RequestParam String semester) {
+		return new ResponseEntity<List<Student>>(studentService.getStudentsUsingDepartmentAndSemester(dept_id,semester),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/admin/deleteStudent/{id}")
 	public ResponseEntity<?> deleteStudent(@PathVariable("id") Integer id) {
 		try {
 			studentService.deleteStudent(id);
@@ -84,11 +89,8 @@ public class StudentController {
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
-
 	
-	
-	@GetMapping("/studentCount")
+	@GetMapping("/admin/studentCount")
 	public ResponseEntity<Long> studentCount() {
 		return new ResponseEntity<Long>(studentService.studentCount(), HttpStatus.OK);
 	}
