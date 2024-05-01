@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="item" *ngIf="promoteGroups.length>0;else noGroups">
+        <ul>
+            <li *ngFor="let group of promoteGroups" (click)="navigateToRemoveGroup(group.department.id,group.semester)">
+                <h6>
+                    <p>Count :{{group.count}}</p>
+                    <p>{{group.department.name}}</p>
+                    <p>{{group.semester}}</p>
+                </h6>
+            </li>
+        </ul>
+    </div>
+    <ng-template #noGroups>
+        <h2>Group of Students not found.</h2>
+        <h4>Please add Students</h4>
+    </ng-template>
+
+</div>

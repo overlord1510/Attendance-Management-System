@@ -1,0 +1,42 @@
+<div class="container-list">
+    <div class="list" *ngIf="studentList.length>0;else noStudents">
+        <form [formGroup]="attendanceForm" (submit)="onSubmit()">
+            <div class="item">
+                <h4>Select date</h4>
+                <input type="date" formControlName="date">
+            </div>
+            <div class="item">
+                <input type="checkbox" (change)="onSelect()" [value]="true"><span>{{selectMessage}}</span>
+            </div>
+            <table>
+                <tr>
+                    <th>Roll</th>
+                    <th>Student Name</th>
+                    <th>Semester</th>
+                    <th>Department</th>
+                    <th>Present</th>
+                </tr>
+                <tr *ngFor="let student of studentList;let i=index">
+                    <td>{{student.universityRoll.substring(student.universityRoll.length-4)}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.semester}}</td>
+                    <td>{{student.department.name}}</td>
+                    <td formArrayName="attendees"><input type="checkbox" [formControlName]="i"></td>
+                </tr>
+            </table>
+            <div class="button-item">
+                <button class="button-submit" type="submit" [disabled]="attendanceForm.invalid">
+                    Submit
+                    <div class="arrow-wrapper" *ngIf="!attendanceForm.invalid">
+                        <div class="arrow"></div>
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+    <ng-template #noStudents>
+        <h2>No Students Assigned for this batch</h2>
+        <h4 *ngIf="role!='ADMIN'">Contact Admin</h4>
+        <h4 *ngIf="role=='ADMIN'">Please Assign Students.</h4>
+    </ng-template>
+</div>

@@ -1,0 +1,46 @@
+<div class="container-list">
+    <button class="button-add" (click)="navigateToRegisterBatch()">Add New Batch</button>
+    <div class="list" *ngIf="batchList.length>0;else noBatches">
+        <table class="large">
+            <tr>
+                <th>Batch Id</th>
+                <th>Batch Name</th>
+                <th>Batch Type</th>
+                <th>Semester</th>
+                <th>Department</th>
+                <th>Courses</th>
+                <th>Edit Delete</th>
+            </tr>
+            <tr *ngFor="let batch of batchList">
+                <td>{{batch.id}}</td>
+                <td>{{batch.batchName}}</td>
+                <td>{{batch.batchType}}</td>
+                <td>{{batch.semester}}</td>
+                <td>{{batch.department.name}}</td>
+                <td>
+                    <ol>
+                        <li *ngFor="let course of batch.courses">{{course.courseName}}</li>
+                    </ol>
+                </td>
+                <td class="edit"><img src="../../../assets/images/edit.svg" (click)="editBatch(batch.id)"><img src="../../../assets/images/delete.svg" (click)="deleteBatch(batch.id)"></td>
+            </tr>
+        </table>
+        <table class="small">
+            <tr>
+                <th>Batch Id</th>
+                <th>Batch</th>
+                <th>Edit Delete</th>
+            </tr>
+            <tr *ngFor="let batch of batchList">
+                <td>{{batch.id}}</td>
+                <td style="word-wrap: break-word;">{{batch.batchName}} {{batch.batchType}} {{batch.department.name}} {{batch.semester}}</td>
+                <td class="edit"><img src="../../../assets/images/edit.svg" (click)="editBatch(batch.id)"><img src="../../../assets/images/delete.svg" (click)="deleteBatch(batch.id)"></td>
+            </tr>
+        </table>
+    </div>
+    <ng-template #noBatches>
+        <h2>Batches not found.</h2>
+        <h4>Please add batch</h4>
+    </ng-template>
+
+</div>

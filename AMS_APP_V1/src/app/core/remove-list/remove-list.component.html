@@ -1,0 +1,32 @@
+<div class="container-list">
+    <div class="list" *ngIf="studentList.length>0;else noStudents">
+        <form [formGroup]="removeForm" (submit)="onSubmit()">
+            <button class="button-add" type="submit">Submit</button>
+            <span><input type="checkbox" formControlName="passout"> Is this batch passout?</span>
+    
+            <table>
+                <tr>
+                    <th>Student Id</th>
+                    <th>Student Name</th>
+                    <th>Semester</th>
+                    <th>Department</th>
+                    <th>University Roll</th>
+                    <th>promote</th>
+                </tr>
+                <tr *ngFor="let student of studentList;let i=index">
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.semester}}</td>
+                    <td>{{student.department.name}}</td>
+                    <td>{{student.universityRoll}}</td>
+                    <td formArrayName="promotes"><input type="checkbox" [formControlName]="i"></td>
+                </tr>
+            </table>
+    
+        </form>
+    </div>
+    <ng-template #noStudents>
+        <h2>Students not found.</h2>
+        <h4>Please add Students</h4>
+    </ng-template>
+</div>

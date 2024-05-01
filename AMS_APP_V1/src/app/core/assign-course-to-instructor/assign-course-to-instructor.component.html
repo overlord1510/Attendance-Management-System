@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="inner-container">
+        <div class="instructor-details">
+            <ul>
+                <li>Id: {{ instructor_resp.id }}</li>
+                <li>Name: {{ instructor_resp.name }}</li>
+                <li>Email: {{ instructor_resp.userAuth.email }}</li>
+                <li>DOB: {{ instructor_resp.dob | date: 'dd-MM-yyyy' }}</li>
+                <li>Department: {{ instructor_resp.department.name }}</li>
+                <li>Gender: {{ instructor_resp.gender }}</li>
+            </ul>
+
+            <div class="filterList">
+                <h5>Filter Course using </h5>
+                <select (change)="onSelectEvent($event,'sem')">
+                    <option [selected]="true" [hidden]="true" [disabled]="true">Select Semester</option>
+                    <option value="SEM_1">Sem-1</option>
+                    <option value="SEM_2">Sem-2</option>
+                    <option value="SEM_3">Sem-3</option>
+                    <option value="SEM_4">Sem-4</option>
+                    <option value="SEM_5">Sem-5</option>
+                    <option value="SEM_6">Sem-6</option>
+                    <option value="SEM_7">Sem-7</option>
+                    <option value="SEM_8">Sem-8</option>
+                    <option value="SEM_9">Sem-9</option>
+                    <option value="SEM_10">Sem-10</option>
+                </select>
+                <select (change)="onSelectEvent($event,'courseType')">
+                    <option [selected]="true" [hidden]="true" [disabled]="true">Select Course Type</option>
+                    <option value="THEORY">Theory</option>
+                    <option value="LABORATORY">Laboratory</option>
+                </select>
+            </div>
+
+            <div *ngIf="instructor_resp.courses!.length>0; else noCourses">
+                <h3>Selected Courses</h3>
+                <ol>
+                    <li *ngFor="let course of instructor_resp.courses">{{course.courseCode}} {{course.courseName}}</li>
+                </ol>
+            </div>
+            <ng-template #noCourses>
+                <h3>No Courses Assigned</h3>
+            </ng-template>
+        </div>
+        <div class="course-container">
+            <form *ngIf="courseForm" [formGroup]="courseForm" (submit)="onSubmit()">
+                <div>
+                    <h3>Choose Courses from below</h3>
+                    <div class="item">
+                        <ul formArrayName="courses">
+                            <li *ngFor="let control of coursesFormArray.controls;let i=index">
+                                <input type="checkbox" [formControlName]="i" (change)="onCourseSelect(i)">
+                                {{filteredCourseList.at(i)!.courseName}}
+                                {{filteredCourseList.at(i)!.courseType |titlecase}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="button-item">
+                    <button class="button-submit" type="submit">
+                        Submit
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

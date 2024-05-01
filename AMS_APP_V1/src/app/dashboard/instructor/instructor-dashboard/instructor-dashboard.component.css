@@ -1,0 +1,68 @@
+.container-dashboard {
+    margin: 10px;
+    padding: 10px;
+    /* width: 100vw; */
+    height: 85vh;
+}
+
+table {
+    margin-top: 5px;
+    padding-top: 5px;
+    width: 100%;
+    background-color: #f2faef96;
+    box-shadow: 3px 7px 10px #BFD8AF, -3px 7px 10px #BFD8AF;
+}
+
+table,
+tr {
+    border: 1px solid #99BC85;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,td{
+    margin-left: 5px;
+    padding-left: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+
+tr:nth-child(n+2):hover {
+    cursor: pointer;
+}
+
+.assign-attendance{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+
+    .admin-control ul {
+        display: grid;
+        grid-template-columns: 45% 45%;
+        justify-content: space-between;
+    }
+
+    .admin-control ul li {
+        display: block;
+        font-size: 1.3rem;
+    }
+
+    h6 {
+        word-wrap: break-word;
+    }
+
+    table{
+        width: 100%;
+    }
+
+    th,td{
+        word-break: break-word;
+    }
+
+  
+}

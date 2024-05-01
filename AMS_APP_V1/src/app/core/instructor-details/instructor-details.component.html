@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="inner-container">
+        <div class="instructor-details">
+            <div *ngIf="instructor_resp.id!=-1">
+                <table>
+                    <tr>
+                        <td>Id</td>
+                        <td>{{instructor_resp.id}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{instructor_resp.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>DOB</td>
+                        <td>{{instructor_resp.dob|date:'dd-MMM-yyyy'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{instructor_resp.userAuth.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td>{{instructor_resp.department.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>{{instructor_resp.gender}}</td>
+                    </tr>
+                    <tr>
+                        <td>Role</td>
+                        <td>{{instructor_resp.userAuth.role}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="course-container">
+            <div *ngIf="instructor_resp.courses!.length>0;else noCourses">
+                <h3 style="text-align: center;">Assigned Courses</h3>
+                <table>
+                    <tr *ngFor="let course of instructor_resp.courses;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{course.courseName}}</td>
+                        <td>{{course.courseCode}}</td>
+                        
+                    </tr>
+                </table>
+            </div>
+            <ng-template #noCourses>
+                <h3 style="text-align: center;">Course not assigned</h3>
+            </ng-template>
+        </div>
+        <div class="batch-container">
+            <div *ngIf="instructor_resp.batches!.length>0;else noBatches">
+                <h3 style="text-align: center;">Assigned Batches</h3>
+                <table>
+                    <tr *ngFor="let batch of instructor_resp.batches;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{batch.batchName}}</td>
+                        <td>{{batch.department.name}}</td>
+                        <td>{{batch.semester}}</td>
+                        <td>{{batch.batchType}}</td>
+                    </tr>
+                </table>
+            </div>
+            <ng-template #noBatches>
+                <h3 style="text-align: center;">Batch not assigned</h3>
+            </ng-template>
+
+        </div>
+    </div>
+
+    <button class="button-normal" (click)="toggleRole()">Toggle Role</button>
+    <button class="button-normal" (click)="assignCourses(instructor_resp.id)">Assign Course</button>
+    <button class="button-normal" (click)="assignBatches(instructor_resp.id)">Assign Batch</button>
+</div>

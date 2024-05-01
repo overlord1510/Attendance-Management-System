@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="item">
+        <div class="left-item">
+            <img src="../../../assets/images/loginBg.svg" alt="">
+        </div>
+        <div class="right-item">
+
+            <div class="first">
+                <div class="headline">
+                    <h1>AttendAce</h1>
+                    <p>AttendAce is a comprehensive Attendance Management System designed to streamline and automate
+                        attendance tracking processes for organizations of all sizes. With AttendAce, you can easily
+                        manage attendance records, track employee or student attendance.</p>
+                </div>
+            </div>
+
+            <div class="second">
+                <div class="headline">
+                    <h1>{{'welcome back'|titlecase}}</h1>
+                    <p>Please enter your details</p>
+                </div>
+
+                <form [formGroup]="loginForm" (submit)="onSubmit()">
+                    <div class="form-item">
+                        <label for="email">Email/Username</label>
+                        <input type="email" placeholder="Email/Username" formControlName="email">
+                        <div *ngIf="val['email'].touched && val['email'].invalid">Invalid Email</div>
+                    </div>
+                    <div class="form-item">
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Password" formControlName="password">
+                        <div *ngIf="val['password'].touched && val['password'].invalid">Invalid Password</div>
+                    </div>
+
+                    <div class="reset-password">
+                        <p (click)="navigateToRecoverComponent()">Forgot Password</p>
+                    </div>
+
+                    <div class="form-item">
+                        <button class="button-signin" type="submit" [disabled]="loginForm.invalid">SignIn</button>
+                    </div>
+                </form>
+                <div class="register">
+                    <p>Don’t have an account? <span (click)="navigateToRegisterStudents()">Sign up fo free!</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

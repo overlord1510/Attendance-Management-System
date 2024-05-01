@@ -1,0 +1,21 @@
+
+<div class="container-list">
+    <table>
+        <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Course Type</th>
+            <th>Total Present</th>
+            <th>Total Valid Classes</th>
+            <th>Percentage</th>
+        </tr>
+        <tr *ngFor="let attendance of attendanceList">
+            <td>{{attendance.courseCode}}</td>
+            <td>{{attendance.courseName}}</td>
+            <td>{{attendance.courseType}}</td>
+            <td>{{attendance.daysPresent}}</td>
+            <td>{{attendance.totalDays}}</td>
+            <td>{{(attendance.daysPresent/attendance.totalDays)|percent}}</td>
+        </tr>
+    </table>
+</div>

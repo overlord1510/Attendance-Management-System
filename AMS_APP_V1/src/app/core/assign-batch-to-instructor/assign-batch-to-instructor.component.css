@@ -1,0 +1,65 @@
+.container {
+    margin: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.inner-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filterList{
+    margin: 10px;
+    padding: 10px;
+}
+
+.instructor-details,
+.batch-container {
+    flex: 1;
+    margin: 5px;
+    padding: 5px;
+}
+
+.instructor-details,.batch-container {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+ol{
+    margin: 5px;
+    padding: 5px;
+}
+
+.button-item{
+    padding: 5px;
+    margin: 5px;
+}
+table{
+    text-align: justify;
+}
+
+td{
+    padding: 3px;
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 550px) and (orientation: portrait) {
+    .inner-container {
+        display: block;
+    }
+    
+}

@@ -1,0 +1,61 @@
+<div class="container-dashboard">
+    <div class="admin-control">
+        <ul>
+            <li (click)="navigateToCourseList()">
+                <h6>
+                    <p>{{courseCount}}</p>Total Course
+                </h6>
+            </li>
+            <li (click)="navigateToDepartmentList()">
+                <h6>
+                    <p>{{departmentCount}}</p>Total Department
+                </h6>
+            </li>
+            <li (click)="navigateToInstructorList()">
+                <h6>
+                    <p>{{teacherCount}}</p>Total Teacher
+                </h6>
+            </li>
+            <li (click)="navigateToStudentList()">
+                <h6>
+                    <p>{{studentCount}}</p>Total Student
+                </h6>
+            </li>
+            <li (click)="navigateToBatchList()">
+                <h6>
+                    <p>{{batchCount}}</p>Total Batch
+                </h6>
+            </li>
+
+            <li (click)="navigateToPassout()">
+                <h6>Promote/Remove Batch Of Students</h6>
+            </li>
+        </ul>
+    </div>
+    <div class="assign-attendance">
+        <div class="attendance" *ngIf="assignedBatchList.length>0;else noBatches">
+            <h2>Assigned Batches</h2>
+            <table>
+                <tr>
+                    <th>Sl no</th>
+                    <th>Batch Name</th>
+                    <th>Batch Type</th>
+                    <th>Department</th>
+                    <th>Semester</th>
+                </tr>
+                <tr class="item" *ngFor="let assigned of assignedBatchList;let i=index"
+                    (click)="navigateToAssignAttendance(assigned.batchId, assigned.courseId)">
+                    <td>{{i+1}}</td>
+                    <td>{{assigned.batchName}}</td>
+                    <td>{{assigned.batchType}}</td>
+                    <td>{{assigned.department.name}}</td>
+                    <td>{{assigned.semester}}</td>
+                </tr>
+            </table>
+        </div>
+        <ng-template #noBatches>
+            <h2>Batch not found for Attendance</h2>
+            <h4 *ngIf="role=='ADMIN'">Contact Admin</h4>
+        </ng-template>
+    </div>
+</div>

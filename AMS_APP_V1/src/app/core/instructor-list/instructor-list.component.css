@@ -1,0 +1,105 @@
+.container-list {
+    margin: 10px;
+    padding: 10px;
+}
+
+.button-add {
+    margin: 10px;
+    padding: 10px;
+}
+
+table {
+    margin-top: 5px;
+    padding-top: 5px;
+    width: 100%;
+    background-color: #f2faef96;
+}
+
+table,
+tr {
+    border: 1px solid #99BC85;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,
+td {
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+tr:nth-child(1) {
+    height: 50px;
+}
+
+.edit {
+    display: grid;
+    grid-template-columns: 3rem 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit p {
+    margin-top: 8px;
+    padding-top: 8px;
+}
+
+img {
+    width: 2.5rem;
+    margin: 5px;
+    padding: 5px;
+}
+
+
+.details img:nth-child(1):hover {
+    filter: invert(14%) sepia(100%) saturate(3259%) hue-rotate(208deg) brightness(101%) contrast(103%);
+}
+
+.edit img:nth-child(1):hover {
+    filter: invert(55%) sepia(25%) saturate(1678%) hue-rotate(69deg) brightness(115%) contrast(137%);
+}
+
+.edit img:nth-child(2):hover {
+    filter: invert(20%) sepia(98%) saturate(7498%) hue-rotate(3deg) brightness(99%) contrast(116%);
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 550px) and (orientation: portrait) {
+
+    .container-list {
+        margin: 0px;
+        padding: 0px
+    }
+
+    table {
+        width: 100vw;
+    }
+
+    th,td{
+        
+        word-break: break-word;
+    }
+
+    .edit {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+    td:nth-child(4),
+    th:nth-child(4) {
+        display: none;
+    }
+
+    td:nth-child(5),
+    th:nth-child(5) {
+        display: none;
+    }
+
+    td:nth-child(6),
+    th:nth-child(6) {
+        display: none;
+    }
+}

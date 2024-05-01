@@ -1,0 +1,55 @@
+.navbar{
+    background-color: transparent;
+    width: 100vw;
+    padding: 10px;
+    box-shadow: #BFD8AF 0px 5px 15px 0px;
+    padding-right: 20px;
+}
+
+
+.item{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.item2{
+    display: flex;
+    align-items: center
+}
+
+.name h5:nth-child(2){
+    word-break: break-word;
+}
+
+.item1,.name,.logout{
+    margin: 5px;
+    padding: 5px;
+}
+
+
+.logout{
+    cursor: pointer;
+}
+
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+    .item2{
+        display: block;
+    }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 914px) and (orientation: landscape) {
+
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+}
+
+@media screen and (min-device-width: 500px) and (max-device-width: 1024px) {
+  
+}

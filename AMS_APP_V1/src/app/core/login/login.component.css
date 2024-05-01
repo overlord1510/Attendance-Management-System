@@ -1,0 +1,136 @@
+img {
+    width: 60%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    mix-blend-mode: multiply;
+
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 20px;
+}
+
+.right-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.first,
+.second {
+    margin: 20px;
+    padding: 20px;
+}
+
+.headline {
+    margin-bottom: 5px;
+}
+
+.headline h1,
+p {
+    font-weight: 100;
+}
+
+.second .headline {
+    text-align: center;
+}
+
+.headline p {
+    color: rgba(111, 108, 108, 0.956);
+}
+
+.form-item {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item label {
+    margin: 3px;
+    padding: 3px;
+}
+
+.form-item input {
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #71c9ce00;
+}
+
+.reset-password {
+    cursor: pointer;
+    margin-right: 3px;
+    padding-right: 3px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    text-align: right;
+    color: rgb(160, 61, 61);
+}
+
+.reset-password:hover {
+    color: var(--first);
+}
+
+.register p span {
+    color: rgb(2, 77, 2);
+    cursor: pointer;
+}
+
+.register p span:hover {
+    color: var(--first);
+    cursor: pointer;
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+    .item {
+        display: block;
+    }
+
+    .item .left-item,
+    .right-item .first {
+        display: none;
+    }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 914px) and (orientation: landscape) {
+    .item {
+        display: block;
+    }
+
+    .item .left-item,
+    .right-item .first {
+        display: none;
+    }
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .item {
+        display: block;
+    }
+
+    .item .left-item,
+    .right-item .first {
+        display: none;
+    }
+}
+
+@media screen and (min-device-width: 500px) and (max-device-width: 1024px) {
+    .item {
+        display: block;
+    }
+
+    .item .left-item,
+    .right-item .first {
+        display: none;
+    }
+}
+

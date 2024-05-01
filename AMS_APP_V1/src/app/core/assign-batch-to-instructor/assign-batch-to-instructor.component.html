@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="inner-container">
+        <div class="instructor-details">
+            <ul>
+                <li>Id: {{ instructor_resp.id }}</li>
+                <li>Name: {{ instructor_resp.name }}</li>
+                <li>Email: {{ instructor_resp.userAuth.email }}</li>
+                <li>DOB: {{ instructor_resp.dob | date: 'dd-MM-yyyy' }}</li>
+                <li>Department: {{ instructor_resp.department.name }}</li>
+                <li>Gender: {{ instructor_resp.gender }}</li>
+            </ul>
+
+            <div class="filterList">
+                <h5>Filter Batch using </h5>
+                <select (change)="onSelectEvent($event,'dept')">
+                    <option [selected]="true" [hidden]="true" [disabled]="true">Select Department</option>
+                    <option *ngFor="let dept of deptList" [value]="dept.id">{{ dept.name }}</option>
+                </select>
+                <select (change)="onSelectEvent($event,'sem')">
+                    <option [selected]="true" [hidden]="true" [disabled]="true">Select Semester</option>
+                    <option value="SEM_1">Sem-1</option>
+                    <option value="SEM_2">Sem-2</option>
+                    <option value="SEM_3">Sem-3</option>
+                    <option value="SEM_4">Sem-4</option>
+                    <option value="SEM_5">Sem-5</option>
+                    <option value="SEM_6">Sem-6</option>
+                    <option value="SEM_7">Sem-7</option>
+                    <option value="SEM_8">Sem-8</option>
+                    <option value="SEM_9">Sem-9</option>
+                    <option value="SEM_10">Sem-10</option>
+                </select>
+                <select (change)="onSelectEvent($event,'batchType')">
+                    <option [selected]="true" [hidden]="true" [disabled]="true">Select Course Type</option>
+                    <option value="THEORY">Theory</option>
+                    <option value="LABORATORY">Laboratory</option>
+                </select>
+            </div>
+            <div *ngIf="instructor_resp.batches!.length>0; else noBatches">
+                <h3>Selected Batches</h3>
+                <table>
+                    <tr *ngFor="let batch of instructor_resp.batches;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{batch.batchName}}</td>
+                        <td>{{batch.batchType}}</td>
+                        <td>{{batch.department.name}}</td>
+                        <td>{{batch.semester}}</td>
+                    </tr>
+                </table>
+            </div>
+            <ng-template #noBatches>
+                <h3>No Batches Assigned</h3>
+            </ng-template>
+        </div>
+        <div class="batch-container">
+            <form *ngIf="batchForm" [formGroup]="batchForm" (submit)="onSubmit()">
+                <div>
+                    <h3>Choose Batches from below</h3>
+                    <div class="item">
+                        <table formArrayName="batches">
+                            <tr *ngFor="let control of batchFormArray.controls;let i=index">
+                                <td><input type="checkbox" [formControlName]="i" (change)="onBatchSelect(i)"></td>
+                                <td>{{filteredBatchList.at(i)?.batchName}}</td>
+                                <td>{{filteredBatchList.at(i)?.department?.name}}</td>
+                                <td>{{filteredBatchList.at(i)?.semester}}</td>
+                                <td>{{filteredBatchList.at(i)?.batchType}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="button-item">
+                    <button class="button-submit" type="submit">
+                        Submit
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

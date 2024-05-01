@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "cookie.expiration_time",
+    "type": "java.lang.String",
+    "description": "A description for 'cookie.expiration_time'"
+  },
+  {
+    "name": "jwt_token.expiration_time",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt_token.expiration_time'"
+  },
+  {
+    "name": "jwt.signing.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.signing.secret'"
+  },
+  {
+    "name": "jwt_token.expiration_time",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt_token.expiration_time'"
+  },
+  {
+    "name": "otp.expiration_time",
+    "type": "java.lang.String",
+    "description": "A description for 'otp.expiration_time'"
+  }
+]}

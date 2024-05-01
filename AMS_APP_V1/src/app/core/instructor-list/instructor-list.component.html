@@ -1,0 +1,36 @@
+<div class="container-list">
+    <button class="button-add" (click)="navigateToRegisterInstructor()">Add New Instructor</button>
+    <div class="list" *ngIf="instructorList?.length; else noInstructors">
+        <table>
+            <tr>
+                <th>Teacher Id</th>
+                <th>Teacher Name</th>
+                <th>Department</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>View Details</th>
+                <th class="edit">
+                    <p>Edit</p>
+                    <p>Delete</p>
+                </th>
+            </tr>
+            <tr *ngFor="let instructor of instructorList">
+                <td>{{instructor.id}}</td>
+                <td>{{instructor.name}}</td>
+                <td>{{instructor.department.name}}</td>
+                <td>{{instructor.gender}}</td>
+                <td>{{instructor.userAuth.email}}</td>
+                <td>{{instructor.userAuth.role}}</td>
+                <td class="details"><img src="../../../assets/images/employee-folder.svg"
+                        (click)="viewDetails(instructor.id)"></td>
+                <td class="edit"><img src="../../../assets/images/edit.svg" (click)="editInstructor(instructor.id)"><img
+                        src="../../../assets/images/delete.svg" (click)="deleteInstructor(instructor.id)"></td>
+            </tr>
+        </table>
+    </div>
+    <ng-template #noInstructors>
+        <h2>Instructors not found.</h2>
+        <h4>Please add Instructors</h4>
+    </ng-template>
+</div>

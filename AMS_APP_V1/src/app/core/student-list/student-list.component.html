@@ -1,0 +1,36 @@
+<div class="container-list">
+    <button class="button-add" (click)="navigateToRegisterStudent()">Add New Student</button>
+
+    <div class="list" *ngIf="studentList.length>0;else noStudents">
+        <table>
+            <tr>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Semester</th>
+                <th>Department</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Registration Number</th>
+                <th>University Roll</th>
+                <th>Edit Delete</th>
+            </tr>
+            <tr *ngFor="let student of studentList">
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.semester}}</td>
+                <td>{{student.department.name}}</td>
+                <td>{{student.gender}}</td>
+                <td>{{student.userAuth.email}}</td>
+                <td>{{student.registrationNumber}}</td>
+                <td>{{student.universityRoll}}</td>
+    
+                <td class="edit"><img src="../../../assets/images/edit.svg" (click)="editStudent(student.id)"><img
+                        src="../../../assets/images/delete.svg" (click)="deleteStudent(student.id)"></td>
+            </tr>
+        </table>
+    </div>
+    <ng-template #noStudents>
+        <h2>Students not found.</h2>
+        <h4>Please add Students</h4>
+    </ng-template>
+</div>

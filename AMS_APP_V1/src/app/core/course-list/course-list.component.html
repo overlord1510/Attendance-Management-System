@@ -1,0 +1,28 @@
+<div class="container-list">
+    <button class="button-add" (click)="navigateToRegisterCourse()">Add New Course</button>
+    <div class="list" *ngIf="courseList?.length;else noCourses">
+        <table>
+            <tr>
+                <th>SL.no</th>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Course Type</th>
+                <th>Semester</th>
+                <th>Edit/Delete</th>
+            </tr>
+            <tr *ngFor="let course of courseList;let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{course.courseName}}</td>
+                <td>{{course.courseCode}}</td>
+                <td>{{course.courseType}}</td>
+                <td>{{course.semester}}</td>
+                <td class="edit"><img src="../../../assets/images/edit.svg" (click)="editCourse(course.id)"><img
+                        src="../../../assets/images/delete.svg" (click)="deleteCourse(course.id)"></td>
+            </tr>
+        </table>
+    </div>
+    <ng-template #noCourses>
+        <h2>Courses not found.</h2>
+        <h4>Please add Course</h4>
+    </ng-template>
+</div>

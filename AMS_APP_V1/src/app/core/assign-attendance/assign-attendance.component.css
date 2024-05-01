@@ -1,0 +1,81 @@
+.container-list {
+    margin: 10px;
+    padding: 10px;
+}
+
+.button-add {
+    margin: 10px;
+    padding: 10px;
+}
+
+table {
+    margin-top: 5px;
+    padding-top: 5px;
+    width: 100%;
+    background-color: #f2faef96;
+}
+
+table,
+tr {
+    border: 1px solid #99BC85;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,
+td {
+    margin: 5px;
+    padding: 5px;
+}
+.button-item{
+    margin: 5px;
+    padding: 5px;
+}
+.item {
+    margin: 15px;
+    display: inline-block;
+}
+.item span{
+    margin-left: 10px;
+}
+
+input {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 0.6rem;
+}
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 550px) and (orientation: portrait) {
+
+    .container-list {
+        margin: 0px;
+        padding: 0px
+    }
+
+    table {
+        width: 100vw;
+    }
+
+    th,td{
+        
+        word-break: break-word;
+    }
+
+    .edit {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    td:nth-child(3),
+    th:nth-child(3) {
+        display: none;
+    }
+
+    td:nth-child(4),
+    th:nth-child(4) {
+        display: none;
+    }
+}

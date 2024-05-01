@@ -1,0 +1,82 @@
+<div class="register-container">
+    <form [formGroup]="batchForm" (submit)="onSubmit()">
+        <div class="item">
+            <label for="batchName">Batch Name</label>
+            <input type="text" id="batchName" placeholder="Batch Name" formControlName="batchName">
+        </div>
+        
+        <div class="item">
+            <label for="batchType">Batch Type</label>
+            <select id="batchType" formControlName="batchType" (change)="onSelectChange($event,'batchType')">
+                <option [selected]="true" [disabled]="true" hidden>Select Batch Type</option>
+                <option value="THEORY">Theory</option>
+                <option value="LABORATORY">Laboratory</option>
+            </select>
+        </div>
+        <div class="item">
+            <label for="semester">Semester</label>
+            <div
+                *ngIf="(filterOptions.batchType === 'THEORY' || filterOptions.batchType === 'LABORATORY') || !(isUpdating&&filterOptions.sem); else noSemester">
+                <select id="semester" formControlName="semester" (change)="onSelectChange($event,'sem')">
+                    <option [selected]="true" [disabled]="true" hidden>Select Semester</option>
+                    <option value="SEM_1">Sem-1</option>
+                    <option value="SEM_2">Sem-2</option>
+                    <option value="SEM_3">Sem-3</option>
+                    <option value="SEM_4">Sem-4</option>
+                    <option value="SEM_5">Sem-5</option>
+                    <option value="SEM_6">Sem-6</option>
+                    <option value="SEM_7">Sem-7</option>
+                    <option value="SEM_8">Sem-8</option>
+                    <option value="SEM_9">Sem-9</option>
+                    <option value="SEM_10">Sem-10</option>
+                </select>
+            </div>
+            <ng-template #noSemester>
+                <p>Please select a batch type.</p>
+            </ng-template>
+        </div>
+        <div class="item">
+            <label for="department">Department</label>
+            <select id="department" formControlName="department">
+                <option [selected]="true" [disabled]="true" [hidden]="true">Select Department</option>
+                <option *ngFor="let dept of department_resp" [value]="dept.id">{{ dept.name }}</option>
+            </select>
+        </div>
+
+        <div class="item">
+            <label for="courses">Select Courses</label>
+            <div *ngIf="filteredCourse.length > 0 && filterOptions.sem; else noCourses" formArrayName="courses">
+                <div *ngFor="let control of coursesFormArray.controls; let i = index">
+                    <input type="checkbox" [formControlName]="i"> {{ filteredCourse.at(i)?.courseName }}
+                </div>
+            </div>
+            <ng-template #noCourses>
+                <p>No courses available <br>for the selected semester.</p>
+            </ng-template>
+        </div>
+
+        <div class="item">
+            <button class="button-save" type="submit" [disabled]="batchForm.invalid">
+                <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50" height="20" class="icon">
+                            <path
+                                d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <span>Save</span>
+            </button>
+        </div>
+    </form>
+
+    <button class="button-back" (click)="back()">
+        <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+            <path
+                d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
+            </path>
+        </svg>
+        <span>Back</span>
+    </button>
+</div>
