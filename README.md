@@ -104,6 +104,8 @@ Here are some screenshots of the application:
 - Node.js and npm
 - MySQL
 
+  
+
 ### Backend Setup
 
 1. **Navigate to the `AMS_API_V10` directory:**
@@ -118,13 +120,50 @@ Here are some screenshots of the application:
    CREATE DATABASE ams;
    ```
 
-3. **Update `application.properties` file with your database credentials:**
+3. **Update `application.properties` file with your database credentials and email smtp:**
 
    ```properties
    spring.datasource.url=jdbc:mysql://localhost:3306/ams
    spring.datasource.username=your_username
    spring.datasource.password=your_password
+   #Mail Sending with Gmail SMTP
+   spring.mail.host=smtp.gmail.com
+   spring.mail.port=587
+   spring.mail.username=your_gmail_username@gmail.com
+   spring.mail.password=your_gmail_password
    ```
+
+   ## The Gmail SMTP Server Method
+
+Before configuring Google’s SMTP server, you need to follow these steps if you have two-step verification enabled on your Google email account:
+
+### How to Set Up App Passwords
+
+If you use 2-step verification on your Google account and your mail client doesn’t support verification codes, you’ll have to enable App Passwords before configuring the Google SMTP server settings.
+
+**Why should you do this?**
+Some secure apps can be blocked from accessing your mail account due to two-step verification. An app specific password allows the blocked app or device to access your mail account.
+
+If you don’t have two-factor authentication enabled, you can skip the instructions given below.
+
+Here’s a quick tutorial on how to create an app specific password:
+
+1. Go to your Google Account and choose Security on the left panel.
+2. On the "Signing in to Google" tab, select App Passwords.
+   - If you don’t see this option, it might mean that:
+     - Two-step verification is not set up for your Google account.
+     - Two-step verification is set up for security keys only.
+     - Your account is used through work, school, or another organization.
+     - You’ve turned on Advanced Protection for your account.
+3. Click on Select app and pick the app you’re using.
+4. Click Select device and choose the device you’re using.
+5. Click on Generate.
+6. Follow the instructions to enter the App Password.
+   - The App Password is the 16-character code in the yellow bar on your device.
+7. Click on Done.
+
+**Note:** You won’t have to remember your App Password since you’ll probably use it just once to connect your account to the app.
+
 
 4. **Build and run the Spring Boot application:**
 
